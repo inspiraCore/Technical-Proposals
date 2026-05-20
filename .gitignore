@@ -1,0 +1,14 @@
+.env
+.venv/
+venv/
+Backend/venv/
+Frontend/node_modules/
+node_modules/
+.vite/
+dist/
+build/
+__pycache__/
+*.pyc
+qdrant_storage/
+*.snapshot
+Frontend.zip
