@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Plus, LogOut, Sparkles, User, Bot, Home, Trash2, X } from "lucide-react";
+import { Send, Plus, LogOut, Sparkles, User, Bot, Home, Trash2, X, Menu } from "lucide-react";
 import logo from "@/assets/logo.png";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -43,6 +43,7 @@ const Chat = () => {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [currentUserEmail, setCurrentUserEmail] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -66,8 +67,8 @@ const Chat = () => {
     "شراء مباشر / تعميد",
   ];
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://technical-proposals-production.up.railway.app";
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+
   const getConversationsKey = (email: string) => `ic_conversations_${email}`;
 
   const loadUserConversations = (email: string) => {
@@ -163,40 +164,6 @@ const API_BASE_URL =
     if (!surveyData.activity) return alert("يرجى اختيار نشاط المنافسة");
     if (!surveyData.competitionType) return alert("يرجى اختيار نوع المنافسة");
 
-    const isMeaningfulText = (text: string, requireTwoWords = false) => {
-      const cleaned = text.trim();
-
-      if (!cleaned) return false;
-      if (cleaned.length < 3) return false;
-
-      // يمنع تكرار نفس الحرف بشكل غير منطقي مثل: نننننننن
-      if (/(.)\1{4,}/.test(cleaned)) return false;
-
-      // يستخرج الكلمات العربية أو الإنجليزية
-      const words = cleaned.match(/[\u0600-\u06FFa-zA-Z]{2,}/g) || [];
-
-      if (requireTwoWords && words.length < 2) return false;
-
-      // يمنع الكلمات الطويلة جداً بدون مسافات غالباً تكون خرابيش
-      if (!cleaned.includes(" ") && cleaned.length > 14 && /[\u0600-\u06FF]/.test(cleaned)) {
-        return false;
-      }
-
-      return words.length >= 1;
-    };
-
-    if (!isMeaningfulText(surveyData.projectName)) {
-      return alert("الرجاء إدخال اسم مشروع واضح ومفهوم.");
-    }
-
-    if (surveyData.workScope.trim() && !isMeaningfulText(surveyData.workScope, true)) {
-      return alert("الرجاء إدخال نطاق عمل واضح ومفهوم.");
-    }
-
-    if (surveyData.specialConditions.trim() && !isMeaningfulText(surveyData.specialConditions, true)) {
-      return alert("الرجاء إدخال شروط خاصة واضحة ومفهومة.");
-    }
-
     const userSummary = [
       "تم تزويد بيانات المشروع لتوليد العرض الفني:",
       `- نوع المنافسة: ${surveyData.competitionType}`,
@@ -224,10 +191,10 @@ const API_BASE_URL =
       timestamp: new Date(),
     };
 
-    // ✅ FIX: نحفظ اسم المشروع بشكل صحيح
+    //  FIX: نحفظ اسم المشروع بشكل صحيح
     const newConversation: Conversation = {
       id: newConversationId,
-      title: surveyData.projectName.trim(), // ✅ نحفظ الاسم مباشرة
+      title: surveyData.projectName.trim(), //  نحفظ الاسم مباشرة
       messages: [welcomeMessage, pendingAiMessage],
       createdAt: new Date(),
     };
@@ -259,7 +226,6 @@ const API_BASE_URL =
       }
 
       const data = await res.json();
-      console.log("Compliance Score:", data?.compliance_score);
       const markdown = data?.markdown || "No content returned.";
       
       // ✅ إضافة نسبة الامتثال في النهاية مع مؤشر لوني
@@ -287,31 +253,30 @@ const API_BASE_URL =
 ### درجة الامتثال
 ${colorSymbol} **${complianceScore}/100** - ${statusText}
 `;
-
+        
         contentWithCompliance = markdown + complianceSection;
+        
+        if (data?.compliance_error) {
+          contentWithCompliance += `\n\n**[تنبيه]**: ${data.compliance_error}`;
+        }
       }
 
       setConversations((prev) =>
         prev.map((conv) => {
           if (conv.id !== newConversationId) return conv;
-
           return {
             ...conv,
             messages: conv.messages.map((m) =>
-              m.id === pendingAiMessageId
-                ? { ...m, content: contentWithCompliance }
-                : m
+              m.id === pendingAiMessageId ? { ...m, content: contentWithCompliance } : m
             ),
           };
         })
       );
     } catch (err) {
       console.error(err);
-
       setConversations((prev) =>
         prev.map((conv) => {
           if (conv.id !== newConversationId) return conv;
-
           return {
             ...conv,
             messages: conv.messages.map((m) =>
@@ -319,7 +284,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                 ? {
                     ...m,
                     content:
-                      "An error occurred while generating the technical proposal. Please ensure the API is running and the endpoint URL is correct.",
+                      "حدث خطأ أثناء توليد العرض الفني. تأكد من أن الـ API يعمل وأن العنوان صحيح.",
                   }
                 : m
             ),
@@ -414,7 +379,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
   if (!isAuthenticated) return null;
 
   return (
-    <div className="h-screen flex bg-background" dir="rtl">
+    <div className="h-screen flex bg-background overflow-hidden" dir="rtl">
       {showSurvey && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div
@@ -547,22 +512,46 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
         </div>
       )}
 
-      <aside className="w-72 bg-sidebar flex flex-col border-l border-sidebar-border">
+      {isSidebarOpen && (
+        <button
+          type="button"
+          aria-label="إغلاق القائمة الجانبية"
+          onClick={() => setIsSidebarOpen(false)}
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+        />
+      )}
+
+      <aside
+        className={`fixed inset-y-0 right-0 z-40 w-[82vw] max-w-80 lg:w-72 bg-sidebar flex flex-col border-l border-sidebar-border transform transition-transform duration-300 lg:static lg:translate-x-0 lg:z-auto ${
+          isSidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"
+        }`}
+      >
         <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <img src={logo} alt="IC AI" className="h-10 w-auto" />
               <span className="text-lg font-bold text-sidebar-foreground">IC AI</span>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/")}
-              className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-              title="العودة للرئيسية"
-            >
-              <Home className="h-5 w-5" />
-            </Button>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsSidebarOpen(false)}
+                className="lg:hidden text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+                title="إغلاق القائمة"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/")}
+                className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+                title="العودة للرئيسية"
+              >
+                <Home className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
 
           <div className="bg-sidebar-accent rounded-xl p-4">
@@ -582,7 +571,10 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
 
         <div className="p-4">
           <Button
-            onClick={() => setShowSurvey(true)}
+            onClick={() => {
+              setShowSurvey(true);
+              setIsSidebarOpen(false);
+            }}
             className="w-full justify-start gap-3 bg-secondary text-secondary-foreground hover:bg-secondary/90"
           >
             <Plus className="h-4 w-4" />
@@ -605,7 +597,10 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                           ? "bg-sidebar-primary text-sidebar-primary-foreground"
                           : "text-sidebar-foreground/80 hover:bg-sidebar-accent"
                       }`}
-                      onClick={() => setActiveConversationId(conv.id)}
+                      onClick={() => {
+                        setActiveConversationId(conv.id);
+                        setIsSidebarOpen(false);
+                      }}
                       title={displayTitle}
                     >
                       <span className="flex-1 truncate">{displayTitle}</span>
@@ -644,9 +639,18 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
         </div>
       </aside>
 
-      <main className="flex-1 flex flex-col">
-        <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-card">
+      <main className="flex-1 min-w-0 w-full flex flex-col">
+        <header className="h-16 border-b border-border flex items-center justify-between px-4 lg:px-6 bg-card">
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsSidebarOpen(true)}
+              className="lg:hidden"
+              title="فتح القائمة"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
             <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
               <Sparkles className="h-5 w-5 text-secondary" />
             </div>
@@ -658,8 +662,8 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
 
         {activeConversationId ? (
           <>
-            <ScrollArea className="flex-1 px-6 py-4">
-              <div className="max-w-3xl mx-auto space-y-6">
+            <ScrollArea className="flex-1 px-3 lg:px-6 py-4">
+              <div className="w-full max-w-3xl mx-auto space-y-6">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -678,7 +682,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                     </div>
 
                     <div
-                      className={`max-w-[80%] rounded-2xl px-5 py-3 ${
+                      className={`max-w-[calc(100vw-4.5rem)] lg:max-w-[80%] rounded-2xl px-4 lg:px-5 py-3 ${
                         message.role === "user"
                           ? "bg-secondary text-secondary-foreground rounded-br-none"
                           : "bg-card border border-border rounded-bl-none"
@@ -688,7 +692,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                         <div
                           dir="rtl"
                           style={{ direction: "rtl", textAlign: "right" }}
-                          className="prose prose-sm max-w-none text-right"
+                          className="prose prose-sm max-w-none text-right break-words"
                         >
                           <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
@@ -743,7 +747,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                           </ReactMarkdown>
                         </div>
                       ) : (
-                        <p className="text-sm leading-relaxed whitespace-pre-line">{message.content}</p>
+                        <p dir="rtl" className="text-sm leading-relaxed whitespace-pre-line break-words text-right">{message.content}</p>
                       )}
                     </div>
                   </div>
@@ -777,10 +781,41 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
               </div>
             </ScrollArea>
 
+            <div className="border-t border-border p-4 bg-card">
+              <div className="max-w-3xl mx-auto">
+                <div className="flex gap-3 items-center">
+                  <div className="flex-1 relative">
+                    <Input
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="اكتب رسالتك هنا..."
+                      className="h-12 pr-4 pl-12 bg-background border-border focus:border-secondary rounded-xl"
+                    />
+                  </div>
+                  <Button
+                    onClick={handleSend}
+                    disabled={!input.trim() || isTyping}
+                    variant="hero"
+                    size="icon"
+                    className="h-12 w-12 rounded-xl"
+                  >
+                    <Send className="h-5 w-5 rotate-180" />
+                  </Button>
+                </div>
+
+                <p className="text-xs text-muted-foreground text-center mt-3">
+                  IC AI may occasionally make mistakes. Please verify important information.
+                </p>
+              </div>
+            </div>
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
+                <Sparkles className="h-10 w-10 text-secondary" />
+              </div>
               <h2 className="text-2xl font-bold text-foreground mb-2">مرحباً بك في IC AI</h2>
               <p className="text-muted-foreground mb-6">ابدأ محادثة جديدة للتحدث مع المساعد الذكي</p>
               <Button onClick={createNewConversation} variant="hero" size="lg" className="gap-2">
