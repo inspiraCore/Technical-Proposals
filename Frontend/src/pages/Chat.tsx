@@ -66,8 +66,8 @@ const Chat = () => {
     "شراء مباشر / تعميد",
   ];
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
-
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://technical-proposals-production.up.railway.app";
   const getConversationsKey = (email: string) => `ic_conversations_${email}`;
 
   const loadUserConversations = (email: string) => {
@@ -162,6 +162,40 @@ const Chat = () => {
     if (!surveyData.projectName.trim()) return alert("يرجى إدخال اسم المشروع");
     if (!surveyData.activity) return alert("يرجى اختيار نشاط المنافسة");
     if (!surveyData.competitionType) return alert("يرجى اختيار نوع المنافسة");
+
+    const isMeaningfulText = (text: string, requireTwoWords = false) => {
+      const cleaned = text.trim();
+
+      if (!cleaned) return false;
+      if (cleaned.length < 3) return false;
+
+      // يمنع تكرار نفس الحرف بشكل غير منطقي مثل: نننننننن
+      if (/(.)\1{4,}/.test(cleaned)) return false;
+
+      // يستخرج الكلمات العربية أو الإنجليزية
+      const words = cleaned.match(/[\u0600-\u06FFa-zA-Z]{2,}/g) || [];
+
+      if (requireTwoWords && words.length < 2) return false;
+
+      // يمنع الكلمات الطويلة جداً بدون مسافات غالباً تكون خرابيش
+      if (!cleaned.includes(" ") && cleaned.length > 14 && /[\u0600-\u06FF]/.test(cleaned)) {
+        return false;
+      }
+
+      return words.length >= 1;
+    };
+
+    if (!isMeaningfulText(surveyData.projectName)) {
+      return alert("الرجاء إدخال اسم مشروع واضح ومفهوم.");
+    }
+
+    if (surveyData.workScope.trim() && !isMeaningfulText(surveyData.workScope, true)) {
+      return alert("الرجاء إدخال نطاق عمل واضح ومفهوم.");
+    }
+
+    if (surveyData.specialConditions.trim() && !isMeaningfulText(surveyData.specialConditions, true)) {
+      return alert("الرجاء إدخال شروط خاصة واضحة ومفهومة.");
+    }
 
     const userSummary = [
       "تم تزويد بيانات المشروع لتوليد العرض الفني:",
