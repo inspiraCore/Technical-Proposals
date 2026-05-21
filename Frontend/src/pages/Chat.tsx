@@ -68,6 +68,10 @@ const Chat = () => {
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "https://technical-proposals-production.up.railway.app";
+
+  const cleanAssistantContent = (content: string) =>
+    content.replace(/\[تنبيه\]:\s*Could not parse JSON from response:\s*/g, "");
+
   const getConversationsKey = (email: string) => `ic_conversations_${email}`;
 
   const loadUserConversations = (email: string) => {
@@ -739,7 +743,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                               ),
                             }}
                           >
-                            {message.content}
+                            {cleanAssistantContent(message.content)}
                           </ReactMarkdown>
                         </div>
                       ) : (
