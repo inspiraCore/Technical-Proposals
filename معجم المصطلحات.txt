@@ -1,0 +1,176 @@
+معجم المصطلحات:
+
+موازنة
+تقدير الإيرادات والنفقات المتوقعة خلال فترة مالية محددة (عادةً عام مالي)، وخطط الحكومة لتخصيص الموارد للقطاعات المختلفة.
+
+Budgeting
+Estimates of the expected revenues and expenditures over a specific financial period (usually a fiscal year), and the government’s plans for allocating resources to various sectors.
+
+
+ميزانية
+المبالغ الفعلية التي تم تخصيصها أو إنفاقها بناءً على ما تم تحديده في الموازنة العامة. تعكس الميزانية الحالة الفعلية للموارد المالية بعد تنفيذ الخطط المحددة في الموازنة، ويتم مراقبتها بشكل دوري للتأكد من تطابقها مع التوقعات.
+
+Budget
+The actual amounts allocated or spent based on the estimates outlined in the general budget. The public accounts reflect the actual financial status after the execution of the plans and goals defined in the budget, and they are monitored periodically to ensure they align with the expectations.
+
+
+أثر مالي
+القيمة المقدّرة أو المحقّقة للتكاليف، بما يعكس التغير في الوضع المالي للجهة من حيث النفقات أو الإيرادات أو الكفاءة المالية.
+
+Financial Impact
+The estimated or realized value of the costs, reflecting the change in the financial position of the entity in terms of expenses, revenues, or financial efficiency.
+
+النفقات
+ما تصرفه الحكومة على القطاعات المختلفة كالتعليم والصحة من أجل التنمية وتحسين مستوى معيشة المواطنين، وتنقسم النفقات إلى نفقات تشغيلية ونفقات رأسمالية.
+
+Expenses
+What the government spends on various sectors, such as education and health, for development and improving citizens' standard of living. Expenditures are divided into operating expenses and capital expenditures.
+
+
+
+كفاءة الإنفاق
+تعظيم الأثر مقابل الصرف، ويكون ذلك من خلال الاستخدام الأمثل للموارد المتاحة ومعالجة أنواع الهدر المختلفة بما لا يؤثر في جودة الخدمات المقدمة.
+
+Spending Efficiency
+Maximizing impact relative to expenditure, by making optimal use of available resources and addressing various types of waste without compromising the quality of services provided.
+
+اتفاقية إطارية
+اتفاقية بين جهة أو أكثر من الجهات الحكومية وواحد أو أكثر من الموردين أو المقاولين أو المتعهدين وتتضمن شروط وأحكام العقود التي ستتم ترسيتها أثناء مدة معينة.
+
+Framework Agreement
+A formal agreement between two or more organizations of the government bodies with suppliers or contractors which contains
+conditions and regulations of the contract.
+
+
+اتفاقية إعادة الشراء
+معاملة مالية حيث يبيع طرف أوراقًا مالية لطرف آخر مع اتفاق لإعادة شرائها في تاريخ وسعر مستقبلي محدد، وغالبًا ما تُستخدم في التمويل قصير الأجل.
+
+Repurchase Agreement
+A financial transaction where one party sells securities to another with an agreement to repurchase them at a specified future date and price, often used in short-term funding
+
+الناتج المحلي الإجمالي
+إجمالي قيمة السلع والخدمات التي تنتج داخل الدولة خلال فترة زمنية محددة.
+
+Gross Domestic Product (GDP)
+The total value of goods and services produced within a country during a specific period of time.
+
+ائتمان مصرفي
+إجمالي مبلغ الأموال التي يمكن لأي شخص أو شركة اقتراضها من مؤسسة مالية.
+
+Bank Credit
+Entire amount of money that a person or corporation may acquire from a financial institution such as a bank.
+
+
+نظام المنافسات والمشتريات الحكومية
+هو النظام الذي ينظم كيفية قيام الجهات الحكومية بإجراء المنافسات وشراء السلع والخدمات والمشروعات، بما يضمن الشفافية والكفاءة وتحقيق أفضل قيمة ممكنة للمال العام.
+
+Government Tenders and Procurement Law
+The system that regulates how government entities conduct tenders and procure goods, services, and projects, ensuring transparency, efficiency, and the best possible value for public funds.
+
+قواعد السوق
+مجموعة القواعد واللوائح والإجراءات والتعليمات المقترحة من مجلس إدارة السوق والموافق عليها من مجلس هيئة السوق المالية.
+
+Exchange Rules
+The regulations, rules, procedures and instructions proposed by the Board of Directors of the Exchange and approved by the Board of the Capital Market Authority.
+
+
+حالة المنافسة
+حالة المنافسة المسجلة عبر منصة اعتماد مثل: (تحت الإجراء، أو معتمدة).
+
+Bidding Condition
+The status of the registered competition through the Etimad platform such as (under Under processing or approved).
+
+
+مرحلة المنافسة
+تحديد المرحلة الحالية للمنافسة من حيث الإجراءات التي تمت عليها.
+
+Bidding Stage
+Determining the current stage of the competition in terms of the procedures that have been completed.
+
+
+نوع النشاط المنافسة
+تحديد نشاط المنافسة المطروحة مثل (التعليم والتدريب، المهن الاستشارية).
+
+Type of Bidding Activity
+Determine the activity of the proposed competition such as (education and training, consulting professions).
+
+
+أعمال مستثناة من المنافسة العامة
+مشاريع الأعمال العامة التي لا تحتاج إلى إجراء مناقصات أو منافسات عامة لاختيار المقاول المنفذ لها.
+
+Public Works Exempted from Competitions
+Public procurement projects exempt from competitive bidding processes.
+
+منافسة محدودة
+دعوة لعدد محدد من المقاولين والموردين لتنفيذ احتياجات الجهة الحكومية.
+
+Limited Competition
+An invitation to a limited number of contractors and suppliers to do the required work for the government entity.
+
+
+
+مناقصة عامة
+طرح احتياجات الجهة الحكومية لجميع الموردين والمقاولين دون تحديد.
+
+Public Tender
+Inviting all suppliers and contractors without specification to bid to fulfill the needs of the government entity.
+
+
+
+سندات ذات مخاطر عالية
+عقد ذو مخاطر عالية للتخلف عن السداد وتصنيف ائتماني منخفض، وغالبًا ما يقدم عوائد عالية للتعويض عن المخاطر.
+
+High-Risk Bonds
+A bond with a high risk of default and a low credit rating, often offering high returns to compensate for the risk.
+
+إدارة المخاطر
+عملية تحديد المخاطر المالية وتقييمها، ووضع الإجراءات اللازمة لتجنبها أو الحد من آثارها أو التخفيف منها.
+
+Risk Management
+The process of identifying and assessing financial risks, and establishing the necessary measures to avoid them, mitigate, or minimize their impact.
+
+إدارة المخاطر المؤسسية
+أسلوب منهجي لتحديد وتقييم وإدارة المخاطر عبر المؤسسة بأكملها لتحقيق أهداف العمل وحماية الأصول.
+
+Enterprise Risk Management (ERM)
+A systematic approach to identifying, assessing, and managing risks across an entire organization to achieve business objectives and protect assets.
+
+
+إدارة المخاطر المتمركزة حول المستفيد
+تحديد المخاطر التي يمكن أن تؤثر على تجربة المستفيدين ورضاهم واتخاذ التدابير اللازمة للحد منها أو التعامل معها.
+
+Customer-Centric Risk Management
+
+Identifying risks that could impact customer experience and satisfaction and taking the necessary arrangements to reduce or deal with it.
+
+إدارة الالتزامات
+استراتيجيات لإدارة ديون الشركة والتزاماتها المالية وتحسينها للحد من المخاطر وتحسين الاستقرار المالي.
+
+Liability Management
+Strategies for managing and optimizing a company's debt and financial obligations to minimize risk and improve financial stability.
+
+
+إدارة الجودة
+نهج شامل لمراقبة جودة المنتجات والخدمات في المؤسسة وتحسينها ، وغالبًا ما يرتبط بمعايير المنظمة الدولية للتوحيد القياسي (آيزو).
+
+Quality Management
+A comprehensive approach to overseeing and improving the quality of products and services in an organization, often associated with ISO standards.
+
+نوع المطالبة المالية
+نوع المطالبات المالية الصادرة وتشمل: مطالبات عقود، مطالبات عهد وسلف، مطالبات استثنائية، مطالبات فواتير... إلخ.
+
+Type of Financial Request
+The type of financial claims issued, including: contract claims, trust and advance claims, exceptional claims, billing claims ...etc.
+
+حالة المنافسة
+حالة المنافسة المسجلة عبر منصة اعتماد مثل: (تحت الإجراء، أو معتمدة).
+
+Bidding Condition
+The status of the registered competition through the Etimad platform such as (under Under processing or approved).
+
+خدمة استشارية
+خدمة ذات طبيعة مهنية أو استشارية، وتشمل -دون حصر- إعداد الدراسات والأبحاث ووضع المواصفات والمخططات والتصميمات والإشراف على تنفيذها، كخدمات المحاسبين والمحامين.
+
+Advisory Service
+A service of a professional or advisory nature including - without limitation - preparing studies and research, the development of specifications, plans and designs, supervision of their implementation, such as the services of accountants and lawyers.
+

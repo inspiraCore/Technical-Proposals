@@ -1,0 +1,10 @@
+{
+  "limit": 3,
+  "with_payload": true,
+  "filter": {
+    "must": [
+      { "key": "doc_type", "match": { "value": "tp" } },
+      { "key": "pair_id",  "match": { "value": 4 } }
+    ]
+  }
+}
