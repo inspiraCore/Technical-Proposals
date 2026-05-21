@@ -66,8 +66,8 @@ const Chat = () => {
     "شراء مباشر / تعميد",
   ];
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
-
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://technical-proposals-production.up.railway.app";
   const getConversationsKey = (email: string) => `ic_conversations_${email}`;
 
   const loadUserConversations = (email: string) => {
