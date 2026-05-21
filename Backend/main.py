@@ -281,11 +281,13 @@ def generate_rfp_evidence(
     def _retrieve(key: str):
         query = f"{project_title}\n{DEFAULT_INTENTS.get(key, '')}"
         vec = embed(query)
-        
+                
         flt = qm.Filter(
             must=[
-                qm.FieldCondition(key="pair_id", match=qm.MatchValue(value=pair_id)),
-                qm.FieldCondition(key="doc_type", match=qm.MatchValue(value="rfp")),
+                qm.FieldCondition(
+                    key="doc_type",
+                    match=qm.MatchValue(value="rfp")
+                ),
             ]
         )
         
