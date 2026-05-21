@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Plus, LogOut, Sparkles, User, Bot, Home, Trash2, X, Menu } from "lucide-react";
+import { Send, Plus, LogOut, Sparkles, User, Bot, Home, Trash2, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -43,7 +43,6 @@ const Chat = () => {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [currentUserEmail, setCurrentUserEmail] = useState("");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -379,7 +378,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
   if (!isAuthenticated) return null;
 
   return (
-    <div className="h-screen flex bg-background overflow-hidden" dir="rtl">
+    <div className="h-screen flex bg-background" dir="rtl">
       {showSurvey && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div
@@ -512,46 +511,22 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
         </div>
       )}
 
-      {isSidebarOpen && (
-        <button
-          type="button"
-          aria-label="إغلاق القائمة الجانبية"
-          onClick={() => setIsSidebarOpen(false)}
-          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
-        />
-      )}
-
-      <aside
-        className={`fixed inset-y-0 right-0 z-40 w-[82vw] max-w-80 lg:w-72 bg-sidebar flex flex-col border-l border-sidebar-border transform transition-transform duration-300 lg:static lg:translate-x-0 lg:z-auto ${
-          isSidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"
-        }`}
-      >
+      <aside className="w-72 bg-sidebar flex flex-col border-l border-sidebar-border">
         <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <img src={logo} alt="IC AI" className="h-10 w-auto" />
               <span className="text-lg font-bold text-sidebar-foreground">IC AI</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsSidebarOpen(false)}
-                className="lg:hidden text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-                title="إغلاق القائمة"
-              >
-                <X className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => navigate("/")}
-                className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-                title="العودة للرئيسية"
-              >
-                <Home className="h-5 w-5" />
-              </Button>
-            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/")}
+              className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+              title="العودة للرئيسية"
+            >
+              <Home className="h-5 w-5" />
+            </Button>
           </div>
 
           <div className="bg-sidebar-accent rounded-xl p-4">
@@ -571,10 +546,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
 
         <div className="p-4">
           <Button
-            onClick={() => {
-              setShowSurvey(true);
-              setIsSidebarOpen(false);
-            }}
+            onClick={() => setShowSurvey(true)}
             className="w-full justify-start gap-3 bg-secondary text-secondary-foreground hover:bg-secondary/90"
           >
             <Plus className="h-4 w-4" />
@@ -597,10 +569,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                           ? "bg-sidebar-primary text-sidebar-primary-foreground"
                           : "text-sidebar-foreground/80 hover:bg-sidebar-accent"
                       }`}
-                      onClick={() => {
-                        setActiveConversationId(conv.id);
-                        setIsSidebarOpen(false);
-                      }}
+                      onClick={() => setActiveConversationId(conv.id)}
                       title={displayTitle}
                     >
                       <span className="flex-1 truncate">{displayTitle}</span>
@@ -639,18 +608,9 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
         </div>
       </aside>
 
-      <main className="flex-1 min-w-0 w-full flex flex-col">
-        <header className="h-16 border-b border-border flex items-center justify-between px-4 lg:px-6 bg-card">
+      <main className="flex-1 flex flex-col">
+        <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-card">
           <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden"
-              title="فتح القائمة"
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
             <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
               <Sparkles className="h-5 w-5 text-secondary" />
             </div>
@@ -662,8 +622,8 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
 
         {activeConversationId ? (
           <>
-            <ScrollArea className="flex-1 px-3 lg:px-6 py-4">
-              <div className="w-full max-w-3xl mx-auto space-y-6">
+            <ScrollArea className="flex-1 px-6 py-4">
+              <div className="max-w-3xl mx-auto space-y-6">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -682,7 +642,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                     </div>
 
                     <div
-                      className={`max-w-[calc(100vw-4.5rem)] lg:max-w-[80%] rounded-2xl px-4 lg:px-5 py-3 ${
+                      className={`max-w-[80%] rounded-2xl px-5 py-3 ${
                         message.role === "user"
                           ? "bg-secondary text-secondary-foreground rounded-br-none"
                           : "bg-card border border-border rounded-bl-none"
@@ -692,7 +652,7 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                         <div
                           dir="rtl"
                           style={{ direction: "rtl", textAlign: "right" }}
-                          className="prose prose-sm max-w-none text-right break-words"
+                          className="prose prose-sm max-w-none text-right"
                         >
                           <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
@@ -743,11 +703,11 @@ ${colorSymbol} **${complianceScore}/100** - ${statusText}
                               ),
                             }}
                           >
-                            {message.content}
+                            {message.content.replace(/Could not parse JSON from response:?/gi, "").trim()}
                           </ReactMarkdown>
                         </div>
                       ) : (
-                        <p dir="rtl" className="text-sm leading-relaxed whitespace-pre-line break-words text-right">{message.content}</p>
+                        <p className="text-sm leading-relaxed whitespace-pre-line">{message.content.replace(/Could not parse JSON from response:?/gi, "").trim()}</p>
                       )}
                     </div>
                   </div>
